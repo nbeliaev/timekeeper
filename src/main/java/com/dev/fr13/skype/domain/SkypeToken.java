@@ -17,7 +17,7 @@ public class SkypeToken {
         log.debug("Token has been cached until {}", this.expiryDate);
     }
 
-    public String getToken() {
+    public String get() {
         log.debug("Token was gotten from cache");
         return token;
     }

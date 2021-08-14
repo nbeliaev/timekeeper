@@ -26,7 +26,7 @@ public class SkypeCredential {
 
     public synchronized String getToken() {
         if (skypeToken != null && skypeToken.isValid()) {
-            return skypeToken.getToken();
+            return skypeToken.get();
         }
 
         try {
@@ -48,13 +48,6 @@ public class SkypeCredential {
             throw new FailedGetCredential(e);
         }
 
-        return skypeToken.getToken();
+        return skypeToken.get();
     }
-
-    /*@PostConstruct
-    public void test() {
-        var token = getToken();
-        var chatWithMe = "29:1axiDipveZ_JBYR4zNQt0yAFIb92pvDP4w5nCUaUSRbI";
-        SkypeClient.sendMessage(token, chatWithMe, "hello from Java!");
-    }*/
 }

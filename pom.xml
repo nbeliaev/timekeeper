@@ -24,6 +24,7 @@
         <google.api-client.version>1.25.0</google.api-client.version>
         <google.oauth-client>1.31.5</google.oauth-client>
         <google.api-service-sheets>v4-rev493-1.23.0</google.api-service-sheets>
+        <spring.data-mongodb>2.4.4</spring.data-mongodb>
         <unirest.version>3.11.09</unirest.version>
     </properties>
 
@@ -51,6 +52,16 @@
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
             <version>${unirest.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>${spring.data-mongodb}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

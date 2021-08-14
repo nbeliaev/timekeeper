@@ -7,8 +7,10 @@ import kong.unirest.Unirest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 import javax.annotation.PostConstruct;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class AppConfig {
@@ -47,5 +49,14 @@ public class AppConfig {
                 }
             }
         });
+    }
+
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        var source = new ResourceBundleMessageSource();
+        source.setBasenames("messages");
+        source.setUseCodeAsDefaultMessage(true);
+        source.setDefaultEncoding(StandardCharsets.UTF_8.name());
+        return source;
     }
 }

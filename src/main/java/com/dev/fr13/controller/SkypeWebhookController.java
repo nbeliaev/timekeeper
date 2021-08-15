@@ -1,5 +1,6 @@
 package com.dev.fr13.controller;
 
+import com.dev.fr13.message.MessageFormatterService;
 import com.dev.fr13.skype.SkypeClient;
 import com.dev.fr13.skype.SkypeCredential;
 import com.dev.fr13.skype.domain.SkypeMessage;
@@ -15,15 +16,21 @@ public class SkypeWebhookController {
     private static final Logger log = LoggerFactory.getLogger(SkypeWebhookController.class);
 
     private final SkypeCredential skypeCredential;
+    private final MessageFormatterService messageFormatterService;
 
-    public SkypeWebhookController(SkypeCredential skypeCredential) {
+    public SkypeWebhookController(SkypeCredential skypeCredential, MessageFormatterService messageFormatterService) {
         this.skypeCredential = skypeCredential;
+        this.messageFormatterService = messageFormatterService;
     }
 
     @PostMapping("/")
     public ResponseEntity<String> handleBotEvent(@RequestBody SkypeMessage message) {
         log.debug("Process a new message from a chat {}", message.getConversationId());
-        SkypeClient.sendMessage(skypeCredential.getToken(), message.getConversationId(), message.getText());
+        var text = message.getText();
+        if (text != null) {
+            var answer = messageFormatterService.prepareAnswer(text);
+            SkypeClient.sendMessage(skypeCredential.getToken(), message.getConversationId(), answer);
+        }
         return ResponseEntity.ok().build();
     }
 }

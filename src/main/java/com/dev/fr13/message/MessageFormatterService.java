@@ -17,15 +17,16 @@ public class MessageFormatterService {
     }
 
     public String prepareAnswer(String incomingMsg) {
+        var msg = MessageProcessor.extractMsgPayload(incomingMsg);
         MessageFormatter messageFormatter;
 
         if (MessageProcessor.isCommonStat(msg)) {
             messageFormatter = new CommonStatMessage(speechService, messageSource);
-        } else if (MessageProcessor.isPersonalStat(incomingMsg)) {
-            messageFormatter = MessageProcessor.extractPersonName(incomingMsg)
+        } else if (MessageProcessor.isPersonalStat(msg)) {
+            messageFormatter = MessageProcessor.extractPersonName(msg)
                     .map(s -> new PersonalStatMessage(speechService, messageSource, new Person(s)))
                     .orElseGet(() -> new PersonalStatMessage(speechService, messageSource, Person.getDefaultPerson()));
-        } else if (MessageProcessor.isAbout(incomingMsg)) {
+        } else if (MessageProcessor.isAbout(msg)) {
             messageFormatter = new AboutMessage(speechService, messageSource);
         } else {
             messageFormatter = new HelpMessage(speechService, messageSource);

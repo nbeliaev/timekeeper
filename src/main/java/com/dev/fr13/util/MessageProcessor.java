@@ -3,11 +3,16 @@ package com.dev.fr13.util;
 import java.util.Optional;
 
 public class MessageProcessor {
-    private static final String COMMAND_ID_STAT = "/stat";
-    private static final String COMMAND_ID_ABOUT = "/about";
+    private static final String BOT_NAME = "MeetingInfo";
+    private static final String COMMAND_ID_STAT = "stat";
+    private static final String COMMAND_ID_ABOUT = "about";
 
     private static final String SPLITTER = " ";
     private static final int EXPECTED_LENGTH = 3;
+
+    public static String extractMsgPayload(String msg) {
+        return msg.replace(BOT_NAME, "").strip();
+    }
 
     public static Optional<String> extractPersonName(String msg) {
         var parts = msg.split(SPLITTER);

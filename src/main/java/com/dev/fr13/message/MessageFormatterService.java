@@ -18,7 +18,8 @@ public class MessageFormatterService {
 
     public String prepareAnswer(String incomingMsg) {
         MessageFormatter messageFormatter;
-        if (MessageProcessor.isCommonStat(incomingMsg)) {
+
+        if (MessageProcessor.isCommonStat(msg)) {
             messageFormatter = new CommonStatMessage(speechService, messageSource);
         } else if (MessageProcessor.isPersonalStat(incomingMsg)) {
             messageFormatter = MessageProcessor.extractPersonName(incomingMsg)
@@ -29,6 +30,7 @@ public class MessageFormatterService {
         } else {
             messageFormatter = new HelpMessage(speechService, messageSource);
         }
+
         return messageFormatter.prepareMessage();
     }
 }

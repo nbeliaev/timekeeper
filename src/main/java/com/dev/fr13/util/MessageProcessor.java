@@ -29,4 +29,8 @@ public class MessageProcessor {
     public static boolean isAbout(String msg) {
         return msg.startsWith(COMMAND_ID_ABOUT);
     }
+
+    private MessageProcessor() {
+        throw new UnsupportedOperationException();
+    }
 }

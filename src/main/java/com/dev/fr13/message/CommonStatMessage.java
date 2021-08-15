@@ -38,6 +38,7 @@ public class CommonStatMessage extends AbstractMessageFormatter {
     private CommonStatMessage initMessage() {
         builder.append(getSourceMessage(GREET));
         builder.append(BREAK_LINE);
+        builder.append(BREAK_LINE);
         return this;
     }
 
